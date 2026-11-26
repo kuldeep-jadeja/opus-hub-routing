@@ -1,0 +1,11 @@
+{
+  "name": "opus-hub-routing",
+  "owner": { "name": "kuldeep-jadeja" },
+  "plugins": [
+    {
+      "name": "subagent-routing-pane",
+      "source": "./plugins/subagent-routing-pane",
+      "description": "Right-side pane showing Opus as the hub and every subagent it routes to."
+    }
+  ]
+}

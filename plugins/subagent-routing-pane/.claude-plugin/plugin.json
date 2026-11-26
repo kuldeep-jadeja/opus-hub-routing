@@ -1,0 +1,6 @@
+{
+  "name": "subagent-routing-pane",
+  "version": "0.1.0",
+  "description": "Right-side pane showing Opus as the hub and every subagent it routes to: type, model, effort, status and current tool.",
+  "types": "./types/index.d.ts"
+}
