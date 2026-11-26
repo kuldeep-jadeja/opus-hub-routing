@@ -1,0 +1,12 @@
+{
+  "name": "opus-hub-routing",
+  "version": "0.2.0",
+  "description": "Opus as the hub: routes reviews to Opus, scoped builds to Sonnet and lookups to Haiku, enforces the rule, and shows every subagent live in a side pane with tokens, cost and savings.",
+  "author": {
+    "name": "kuldeep-jadeja"
+  },
+  "homepage": "https://github.com/kuldeep-jadeja/opus-hub-routing",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "icon": "./assets/icon.png"
+}

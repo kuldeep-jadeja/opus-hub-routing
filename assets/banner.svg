@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-label="Opus Hub Routing: Opus orchestrates, Sonnet builds, Haiku scouts">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0b1a"/>
+      <stop offset="0.55" stop-color="#16112b"/>
+      <stop offset="1" stop-color="#0a1620"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c26bff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c26bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="opus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d98cff"/>
+      <stop offset="1" stop-color="#8a3dff"/>
+    </linearGradient>
+    <linearGradient id="sonnet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset="1" stop-color="#2f6bff"/>
+    </linearGradient>
+    <linearGradient id="haiku" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dffb2"/>
+      <stop offset="1" stop-color="#14b87a"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d9b8ff"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.035"/>
+    </pattern>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="440" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="440" rx="24" fill="url(#grid)"/>
+
+  <!-- Title block -->
+  <g font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <text x="72" y="118" fill="#b69cff" font-size="20" font-weight="600" letter-spacing="4">CLAUDE CODE MOD</text>
+    <text x="70" y="196" fill="url(#title)" font-size="72" font-weight="800" letter-spacing="-1.5">Opus Hub Routing</text>
+    <text x="72" y="250" fill="#c9c4dd" font-size="26">Opus thinks. Sonnet builds. Haiku scouts.</text>
+    <text x="72" y="288" fill="#8f89a8" font-size="20">Every subagent reports back to the hub, and every build gets reviewed.</text>
+
+    <g transform="translate(72 330)">
+      <rect width="168" height="44" rx="22" fill="#ffffff" fill-opacity="0.06" stroke="#d98cff" stroke-opacity="0.5"/>
+      <circle cx="24" cy="22" r="7" fill="url(#opus)"/>
+      <text x="40" y="29" fill="#eadcff" font-size="18" font-weight="600">Reviews</text>
+      <rect x="182" width="168" height="44" rx="22" fill="#ffffff" fill-opacity="0.06" stroke="#7cc4ff" stroke-opacity="0.5"/>
+      <circle cx="206" cy="22" r="7" fill="url(#sonnet)"/>
+      <text x="222" y="29" fill="#d6ecff" font-size="18" font-weight="600">Builds</text>
+      <rect x="364" width="168" height="44" rx="22" fill="#ffffff" fill-opacity="0.06" stroke="#7dffb2" stroke-opacity="0.5"/>
+      <circle cx="388" cy="22" r="7" fill="url(#haiku)"/>
+      <text x="404" y="29" fill="#d4ffe6" font-size="18" font-weight="600">Lookups</text>
+    </g>
+  </g>
+
+  <!-- Hub and spokes -->
+  <g transform="translate(990 220)">
+    <circle r="150" fill="url(#glow)"/>
+    <g stroke-width="3" stroke-linecap="round" fill="none">
+      <path d="M0 0 L-150 -120" stroke="#d98cff" stroke-opacity="0.7" stroke-dasharray="2 9"/>
+      <path d="M0 0 L170 -40" stroke="#7cc4ff" stroke-opacity="0.7" stroke-dasharray="2 9"/>
+      <path d="M0 0 L-40 160" stroke="#7dffb2" stroke-opacity="0.7" stroke-dasharray="2 9"/>
+    </g>
+
+    <!-- spoke nodes -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="middle">
+      <g transform="translate(-150 -120)">
+        <circle r="44" fill="url(#opus)" filter="url(#soft)" opacity="0.6"/>
+        <circle r="38" fill="#1b1430" stroke="url(#opus)" stroke-width="3"/>
+        <text y="-2" fill="#f1e2ff" font-size="15" font-weight="700">opus</text>
+        <text y="16" fill="#b69cff" font-size="11">reviewer</text>
+      </g>
+      <g transform="translate(170 -40)">
+        <circle r="44" fill="url(#sonnet)" filter="url(#soft)" opacity="0.6"/>
+        <circle r="38" fill="#111a30" stroke="url(#sonnet)" stroke-width="3"/>
+        <text y="-2" fill="#e2f1ff" font-size="15" font-weight="700">sonnet</text>
+        <text y="16" fill="#8cc0ff" font-size="11">builder</text>
+      </g>
+      <g transform="translate(-40 160)">
+        <circle r="44" fill="url(#haiku)" filter="url(#soft)" opacity="0.6"/>
+        <circle r="38" fill="#0f2420" stroke="url(#haiku)" stroke-width="3"/>
+        <text y="-2" fill="#e0fff0" font-size="15" font-weight="700">haiku</text>
+        <text y="16" fill="#7de0aa" font-size="11">scout</text>
+      </g>
+
+      <!-- hub -->
+      <circle r="66" fill="url(#opus)" filter="url(#soft)" opacity="0.7"/>
+      <circle r="60" fill="url(#opus)"/>
+      <circle r="60" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+      <text y="-6" fill="#ffffff" font-size="24" font-weight="800">◆ OPUS</text>
+      <text y="18" fill="#f6eaff" font-size="13" letter-spacing="2">THE HUB</text>
+    </g>
+  </g>
+</svg>

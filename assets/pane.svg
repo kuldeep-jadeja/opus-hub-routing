@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-label="Preview of the routing pane showing Opus as the hub and three subagents">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2738"/>
+      <stop offset="1" stop-color="#211e2e"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <rect x="20" y="16" width="720" height="430" rx="14" fill="#14121d"/>
+    <path d="M34 16h692a14 14 0 0 1 14 14v26H20V30a14 14 0 0 1 14-14z" fill="url(#chrome)"/>
+  </g>
+  <circle cx="46" cy="36" r="7" fill="#ff5f57"/>
+  <circle cx="68" cy="36" r="7" fill="#febc2e"/>
+  <circle cx="90" cy="36" r="7" fill="#28c840"/>
+  <text x="380" y="41" fill="#9a95ad" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">claude — Routing · Opus hub</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="15" xml:space="preserve">
+    <text x="48" y="96" fill="#d98cff" font-weight="700">◆ OPUS · main (hub)</text>
+    <text x="66" y="120" fill="#7d7891">waiting on 1 agent</text>
+
+    <text x="48" y="160" fill="#7d7891">1 working · 4 routed · 48.2k tok · $0.21</text>
+    <text x="48" y="184" fill="#5be39a">≈ $0.28 saved vs all-Opus (estimate)</text>
+    <text x="48" y="208" fill="#ffcc4d">⚠ 1 build not reviewed: run opus-reviewer</text>
+
+    <text x="48" y="248"><tspan fill="#5b566e">├─ </tspan><tspan fill="#5be39a">✓ </tspan><tspan fill="#ffffff" font-weight="700">research-scout</tspan><tspan fill="#5be39a"> haiku</tspan><tspan fill="#5b566e">/low · 9s · 6.0k tok · $0.0040</tspan></text>
+    <text x="48" y="270" fill="#5b566e">│  Find where sessions are stored</text>
+
+    <text x="48" y="302"><tspan fill="#5b566e">├─ </tspan><tspan fill="#5be39a">✓ </tspan><tspan fill="#ffffff" font-weight="700">sonnet-builder</tspan><tspan fill="#6fb3ff"> sonnet</tspan><tspan fill="#5b566e">/default · 1m12s · 31.4k tok · $0.12</tspan></text>
+    <text x="48" y="324" fill="#5b566e">│  Fix token expiry check in auth middleware</text>
+
+    <text x="48" y="356"><tspan fill="#5b566e">├─ </tspan><tspan fill="#ff6b6b">✗ </tspan><tspan fill="#ffffff" font-weight="700">sonnet-builder</tspan><tspan fill="#6fb3ff"> sonnet</tspan><tspan fill="#ffcc4d"> (override dropped)</tspan><tspan fill="#5b566e"> · 20s</tspan></text>
+    <text x="48" y="378" fill="#5b566e">│  Add tests for refresh flow</text>
+
+    <text x="48" y="410"><tspan fill="#5b566e">└─ </tspan><tspan fill="#ffcc4d">● </tspan><tspan fill="#ffffff" font-weight="700">opus-reviewer</tspan><tspan fill="#d98cff"> opus</tspan><tspan fill="#5b566e">/default · Read</tspan></text>
+    <text x="75" y="432" fill="#5b566e">Review auth middleware fix</text>
+  </g>
+</svg>

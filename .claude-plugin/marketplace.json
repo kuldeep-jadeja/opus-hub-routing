@@ -1,11 +1,14 @@
 {
   "name": "opus-hub-routing",
-  "owner": { "name": "kuldeep-jadeja" },
+  "description": "Claude Code mod: Opus as the hub, cheaper subagents for clear-cut work, and a live routing pane.",
+  "owner": {
+    "name": "kuldeep-jadeja"
+  },
   "plugins": [
     {
-      "name": "subagent-routing-pane",
-      "source": "./plugins/subagent-routing-pane",
-      "description": "Right-side pane showing Opus as the hub and every subagent it routes to."
+      "name": "opus-hub-routing",
+      "source": "./",
+      "description": "Opus as the hub, cheaper subagents for clear-cut work, and a live routing pane."
     }
   ]
 }
