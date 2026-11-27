@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="200" viewBox="0 0 760 200" role="img" aria-label="Preview of the tuner band above the prompt: Tuner, Manual, Auto (active), default sonnet / rec., Reset">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2738"/>
+      <stop offset="1" stop-color="#211e2e"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <rect x="20" y="16" width="720" height="160" rx="14" fill="#14121d"/>
+    <path d="M34 16h692a14 14 0 0 1 14 14v26H20V30a14 14 0 0 1 14-14z" fill="url(#chrome)"/>
+  </g>
+  <circle cx="46" cy="36" r="7" fill="#ff5f57"/>
+  <circle cx="68" cy="36" r="7" fill="#febc2e"/>
+  <circle cx="90" cy="36" r="7" fill="#28c840"/>
+  <text x="380" y="41" fill="#9a95ad" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">claude — tuner band</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="15" xml:space="preserve">
+    <text x="48" y="100"><tspan fill="#7d7891">Tuner  </tspan><tspan fill="#ffffff">[ Manual ]</tspan><tspan fill="#d98cff" font-weight="700">[ *Auto ]</tspan><tspan fill="#7d7891"> · default </tspan><tspan fill="#7fb2ff">[ sonnet ]</tspan><tspan fill="#7d7891">/</tspan><tspan fill="#ffffff">[ rec. ]</tspan><tspan fill="#7d7891"> </tspan><tspan fill="#ffffff">[ Reset ]</tspan></text>
+
+    <rect x="40" y="122" width="680" height="34" rx="6" fill="none" stroke="#3a3650"/>
+    <text x="54" y="144" fill="#9a95ad">&gt; </text>
+  </g>
+</svg>

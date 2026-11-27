@@ -10,7 +10,7 @@
 
 <a href="#-install"><img alt="Install in one line" src="https://img.shields.io/badge/install-one%20line-8a3dff?style=for-the-badge&logo=anthropic&logoColor=white"/></a>
 <a href="https://docs.claude.com/en/docs/claude-code"><img alt="Claude Code mod" src="https://img.shields.io/badge/Claude%20Code-mod-d98cff?style=for-the-badge"/></a>
-<img alt="Tests: 9 passing" src="https://img.shields.io/badge/tests-9%20passing-14b87a?style=for-the-badge"/>
+<img alt="Tests: 209 passing" src="https://img.shields.io/badge/tests-209%20passing-14b87a?style=for-the-badge"/>
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-2f6bff?style=for-the-badge"/></a>
 
 <br/><br/>
@@ -18,7 +18,8 @@
 <a href="#-install">Install</a> &nbsp;·&nbsp;
 <a href="#-how-it-works">How it works</a> &nbsp;·&nbsp;
 <a href="#-the-routing-pane">The pane</a> &nbsp;·&nbsp;
-<a href="#-guardrails">Guardrails</a> &nbsp;·&nbsp;
+<a href="#%EF%B8%8F-the-tuner-band">The tuner</a> &nbsp;·&nbsp;
+<a href="#%EF%B8%8F-guardrails">Guardrails</a> &nbsp;·&nbsp;
 <a href="#-savings-math">Savings math</a> &nbsp;·&nbsp;
 <a href="#-faq">FAQ</a>
 
@@ -132,13 +133,14 @@ flowchart LR
     style HUB fill:none,stroke:none
 ```
 
-One install adds three things:
+One install adds four things:
 
 | Part | What it does |
 | :-- | :-- |
 | **Agents** | `opus-hub-routing:opus-reviewer`, `:sonnet-builder` and `:research-scout`, each pinned to its model. |
 | **Routing rule** | Added to the conversation's first message, so Claude knows which agent fits which job. You don't need to edit `CLAUDE.md`. |
 | **Routing pane** | A live side pane showing the hub, every subagent, its model, status, tokens and cost. |
+| **Tuner band** | A row above the prompt that picks the model and effort of every other subagent, by recommendation, by your saved default, or by asking you. |
 
 <br/>
 
@@ -163,6 +165,51 @@ Type **`/routing`** to reopen the pane and print a summary of the session.
 
 <br/>
 
+## 🎛️ The tuner band
+
+<div align="center">
+<img src="assets/band.svg" alt="The tuner band above the prompt: Tuner, Manual, Auto (active), default sonnet / rec., Reset" width="720"/>
+</div>
+
+<br/>
+
+The three routing agents have their model pinned. The tuner handles **everything else** (`general-purpose`, `Explore`, `Plan` and other agents), so a review doesn't run on Haiku and a file search doesn't run on Opus.
+
+| Mode | What happens when a subagent starts |
+| :-- | :-- |
+| **`Auto`** (default) | Your saved default wins. A field left at `rec.` keeps what the call set, or else takes the recommendation below. A toast says what was applied. |
+| **`Manual`** | You're asked first. On a terminal 144 columns or wider, a pick pane opens beside the transcript (`r` Run · `d` Run and save as default · `c` Cancel); on a narrower one, a short chain of dialogs. A dismissed question runs with what was shown, so nothing is ever held back. |
+
+**On the band:** click `Manual` or `Auto` to switch. Click the model or the effort to cycle your saved default (`rec.` means "use the recommendation"), and `Reset` to clear it. Both are kept across sessions.
+
+**The recommendation** for built-in agents, read from the agent type, else the task description:
+
+| Task kind | Model | Effort |
+| :-- | :-- | :-- |
+| review, audit, verify, security | 🟣 `opus` | `high` |
+| implement, build, fix | 🔵 `sonnet` | `medium` |
+| explore, search, research | 🟢 `haiku` | `low` |
+
+A prompt longer than 4,000 characters gets one more step of effort. Any other task inherits the session's model.
+
+> [!TIP]
+> A recommendation reads keywords, not difficulty. When Opus hands real thinking work to a built-in agent, the routing rule tells it to pass `model: "opus"`, and the tuner keeps a model the call set unless you saved a default.
+
+<details>
+<summary><b>Where the tuner stays out of the way</b></summary>
+
+<br/>
+
+- **The three routing agents:** never asked about, and their model never changes. In Auto a saved *effort* still applies to them.
+- **Other custom agents** (yours or another plugin's): no recommendation, since their own definition may pin a model. A saved default or a pick in Manual still applies.
+- **`claude -p` and SDK runs:** nothing is changed, so scripted runs and evals measure what they ask for.
+- **Forks:** never touched.
+- **VS Code:** the band can't be drawn there, so it never asks and behaves as Auto.
+
+</details>
+
+<br/>
+
 ## 🛡️ Guardrails
 
 The rule isn't only written down. The mod also enforces it:
@@ -171,6 +218,8 @@ The rule isn't only written down. The mod also enforces it:
 | :-- | :-- |
 | **Model overrides dropped** | If Claude passes a `model` to one of the three agents, the mod removes it so the agent's own model wins. A toast tells you, and the row shows *(override dropped)*. |
 | **Builds get reviewed** | Every `sonnet-builder` report reaches Opus with a reminder to run `opus-reviewer`. The pane keeps a warning up until a review finishes. |
+| **Pinned roles stay pinned** | The tuner never changes the model of the three routing agents, even with a saved default. |
+| **Pane never blocks work** | If the pane's own bookkeeping fails, the call goes on with the guardrails applied; the pane just misses a line. |
 | **Hub check** | The pane flags it as soon as the main thread isn't on Opus, even before anything is delegated. |
 | **Fails open** | If a hook in the mod ever fails, your work goes on as if the mod weren't there. It never blocks a tool call. |
 | **Clean slate on `/clear`** | The routing record starts over with the new conversation. |
@@ -200,6 +249,15 @@ Costs come from Claude Code's own `/cost` ledger for each subagent. The savings 
 <br/>
 
 No. The plugin's agents have the `opus-hub-routing:` prefix, and the pane recognizes both the prefixed and the plain names. Once the plugin is installed you can delete your hand-copied files and any routing section in `CLAUDE.md`, so Claude reads only one version of the rule.
+
+</details>
+
+<details>
+<summary><b>I already use another mod that sets subagent models. Do they clash?</b></summary>
+
+<br/>
+
+Yes: two mods would rewrite the same calls, and you'd see two bands. Keep one. This plugin's tuner already knows about the routing agents and leaves their model alone.
 
 </details>
 
@@ -242,10 +300,11 @@ Fork the repo, edit the file in `agents/`, and install from your fork. Keep the 
 ├── agents/                # opus-reviewer · sonnet-builder · research-scout
 ├── hooks/
 │   ├── hooks.json
-│   └── register.tsx       # routing rule, guardrails, pane
+│   ├── register.tsx       # every hook: routing rule, guardrails, pane, tuner
+│   └── tuner/             # pure: recommendation, dialogs, band and pick-pane views
 ├── types/index.d.ts       # state contract
-├── tests/pane.test.tsx    # 9 tests
-└── assets/                # banner, pane preview, icon
+├── tests/                 # 209 tests: pane.test.tsx + tests/tuner/
+└── assets/                # banner, pane and band previews, icon
 ```
 
 ```bash

@@ -1,3 +1,5 @@
 .claude-plugin/types/
 .DS_Store
 *.log
+# Sentinels of the tuner pane wait; each wait removes its own.
+.waits/

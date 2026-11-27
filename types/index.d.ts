@@ -34,12 +34,49 @@ export type Review = {
   pending: string[]
 }
 
+// The tuner band and its pick pane. A model or effort is null where the
+// subagent inherits the parent's (shown as `rec.` in the band).
+
+export type TunerMode = 'manual' | 'auto'
+
+export type TunerChoice = {
+  model: string | null
+  effort: string | null
+}
+
+export type TunerSettings = {
+  mode: TunerMode
+  /** The saved default; null while none is set. */
+  saved: TunerChoice | null
+  /** True once the persisted mode and default were loaded into this state. */
+  hydrated: boolean
+}
+
+/** A subagent launch waiting for the person in its pane. */
+export type TunerPending = {
+  /** The pane's id: one pane for each launch. */
+  id: string
+  subagentType: string
+  description: string
+  /** The current selection, which Run applies; it starts at the preset. */
+  model: string | null
+  effort: string | null
+  /** True where the call itself set a model or an effort (the preset may differ from it). */
+  isCallSet: boolean
+}
+
+export type TunerQueue = {
+  items: TunerPending[]
+}
+
 declare module 'claude-code' {
   interface PluginState {
     'opus-hub-routing': {
       routed: Shaped<Routed[]>
       hub: Shaped<Hub>
       review: Shaped<Review>
+      tunerSettings: TunerSettings
+      tunerQueue: TunerQueue
     }
   }
 }

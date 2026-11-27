@@ -30,6 +30,8 @@ const spawnInput = (over: Record<string, unknown>) => ({
 
 test('an Agent call shows under the Opus hub with its model, and is done after it returns', async ($, on) => {
   on('command.register', () => ({ value: { command: 'routing' } }))
+  on('store.get', () => ({ value: undefined }))
+  on('session.surfaces', () => ({ value: ['terminal'] as const }))
   on('ui.open', () => ({ value: { isPlaced: true } }))
   on('session.model', () => ({ value: 'claude-opus-5-5' }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
@@ -60,6 +62,8 @@ test('an Agent call shows under the Opus hub with its model, and is done after i
 
 test('the main model is read at session start, so a non-Opus hub is flagged before any delegation', async ($, on) => {
   on('command.register', () => ({ value: { command: 'routing' } }))
+  on('store.get', () => ({ value: undefined }))
+  on('session.surfaces', () => ({ value: ['terminal'] as const }))
   on('ui.open', () => ({ value: { isPlaced: true } }))
   on('session.model', () => ({ value: 'claude-sonnet-5-5' }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
@@ -107,6 +111,8 @@ test("a builder's report carries a review reminder; other reports do not", async
 
 test('an unreviewed build shows in the pane until opus-reviewer finishes', async ($, on) => {
   on('tool.call', () => ({ result: {} }))
+  on('store.get', () => ({ value: undefined }))
+  on('session.surfaces', () => ({ value: ['terminal'] as const }))
   on('agent.spawn', (_, e) => ({ model: e.subagentType.includes('reviewer') ? 'claude-opus-5-5' : 'claude-sonnet-5-5', agentId: e.tool_use_id === 't1' ? 'a1' : 'a2' }))
   on('agent.list', () => ({ value: [] }))
   on('turn.complete', () => ({ text: '' }))
@@ -134,6 +140,8 @@ test('an unreviewed build shows in the pane until opus-reviewer finishes', async
 
 test('cost and the all-Opus savings estimate come from the agent ledger', async ($, on) => {
   on('tool.call', () => ({ result: {} }))
+  on('store.get', () => ({ value: undefined }))
+  on('session.surfaces', () => ({ value: ['terminal'] as const }))
   on('agent.spawn', () => ({ model: 'claude-haiku-5-5', agentId: 'a1' }))
   on('agent.list', () => ({
     value: [{ id: 'a1', model: 'claude-haiku-5-5', cost: { usd: 0.01 }, usage: [{ input_tokens: 5000, output_tokens: 1000, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, model: 'claude-haiku-5-5' }] }] as never,
